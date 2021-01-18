@@ -1,0 +1,11 @@
+button {
+  margin-left: 16px;
+}
+
+.active {
+  filter: brightness(0.7);
+}
+
+span {
+  font-size: large;
+}

@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Edição de Participante</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+    <mat-grid-list cols="3" rowHeight="128px">
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>CPF</mat-label>
+          <input type="text" formControlName="cpf" maxlength="11" matInput placeholder="Digite seu cpf">
+          <mat-hint>Digite somente números</mat-hint>
+          <mat-error *ngIf="loginForm.get('cpf').invalid">{{getErrorMessage('cpf')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>Senha</mat-label>
+          <input [type]="hide ? 'password' : 'text'" type="password" formControlName="senha" matInput placeholder="Digite sua senha">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('senha').invalid">{{getErrorMessage('senha')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Entrar</button>
+        <button class="limpar" type="button" mat-raised-button color="warn" (click)="onCancel()">Limpar</button>
+        <button [ngClass]="{'hide-element': !participante}" class="limpar" type="button" mat-raised-button (click)="encerrarEdicao()">Sair</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</mat-card>
+
+<app-cadastro [hidden]="!participante" [modoEdicao]="true" #cadastro></app-cadastro>

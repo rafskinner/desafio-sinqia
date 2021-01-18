@@ -1,0 +1,143 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cadastro de Participante</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="cadastroForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+    <mat-grid-list cols="2" rowHeight="128px">
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>CPF</mat-label>
+          <input required type="text" id="cpf" formControlName="cpf" maxlength="11" matInput placeholder="Digite seu cpf">
+          <mat-hint>Digite somente números</mat-hint>
+          <mat-error *ngIf="cadastroForm.get('cpf').invalid">{{getErrorMessage('cpf')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>Senha</mat-label>
+          <input required [type]="hide ? 'password' : 'text'" type="password" id="senha" formControlName="senha" matInput placeholder="Digite sua senha">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="cadastroForm.get('senha').invalid">{{getErrorMessage('senha')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>Nome Completo</mat-label>
+          <input required type="text" id="nomeCompleto" formControlName="nomeCompleto" matInput placeholder="Digite seu nome completo">
+          <mat-error *ngIf="cadastroForm.get('nomeCompleto').invalid">{{getErrorMessage('nomeCompleto')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>Email</mat-label>
+          <input required type="text" id="email" formControlName="email" matInput placeholder="Digite seu email">
+          <mat-error *ngIf="cadastroForm.get('email').invalid">{{getErrorMessage('email')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>Data de Nascimento</mat-label>
+          <input required class="datepicker" readonly matInput [matDatepicker]="picker" id="dataNascimento" formControlName="dataNascimento" placeholder="Digite sua data de nascimento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+          <mat-hint>Clique no ícone para selecionar data</mat-hint>
+          <mat-error *ngIf="cadastroForm.get('dataNascimento').invalid">{{getErrorMessage('dataNascimento')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <div formGroupName="enderecoCompleto">
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>CEP</mat-label>
+            <input required type="text" id="cep" formControlName="cep" maxlength="8" matInput placeholder="Digite seu CEP">
+            <mat-hint>Digite somente números</mat-hint>
+            <mat-error *ngIf="cadastroForm.get('enderecoCompleto.cep').invalid">{{getErrorMessage('enderecoCompleto.cep')}}</mat-error>
+          </mat-form-field>
+          <button class="cep" type="button" mat-raised-button color="primary" (click)="onBuscarCep(cadastroForm.get('enderecoCompleto.cep').value)">Buscar</button>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>Logradouro</mat-label>
+            <input required type="text" id="logradouro" formControlName="logradouro" matInput placeholder="Digite seu Logradouro">
+            <mat-error *ngIf="cadastroForm.get('enderecoCompleto.logradouro').invalid">{{getErrorMessage('enderecoCompleto.logradouro')}}</mat-error>
+            <mat-hint>Digite a sua Rua/Avenida sem número nem complemento</mat-hint>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>Número</mat-label>
+            <input type="text" id="numero" formControlName="numero" matInput placeholder="Digite o Número do Endereço">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>Complemento</mat-label>
+            <input required type="text" id="complemento" formControlName="complemento" matInput placeholder="Digite o complemento">
+            <mat-error *ngIf="cadastroForm.get('enderecoCompleto.complemento').invalid">{{getErrorMessage('enderecoCompleto.complemento')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>Bairro</mat-label>
+            <input required type="text" id="bairro" formControlName="bairro" matInput placeholder="Digite seu Bairro">
+            <mat-error *ngIf="cadastroForm.get('enderecoCompleto.bairro').invalid">{{getErrorMessage('enderecoCompleto.bairro')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>Cidade</mat-label>
+            <input required type="text" id="localidade" formControlName="localidade" matInput placeholder="Digite sua Cidade">
+            <mat-error *ngIf="cadastroForm.get('enderecoCompleto.localidade').invalid">{{getErrorMessage('enderecoCompleto.localidade')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>Estado</mat-label>
+            <mat-select required id="uf" formControlName="uf">
+              <mat-option *ngFor="let uf of ufs" [value]="uf">
+                {{uf}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="cadastroForm.get('enderecoCompleto.uf').invalid">{{getErrorMessage('enderecoCompleto.uf')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="standard">
+            <mat-label>DDD</mat-label>
+            <input required type="text" id="ddd" formControlName="ddd" maxlength="2" matInput placeholder="Digite seu DDD">
+            <mat-error *ngIf="cadastroForm.get('enderecoCompleto.ddd').invalid">{{getErrorMessage('enderecoCompleto.ddd')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+      </div>
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="standard">
+          <mat-label>Telefone</mat-label>
+          <input required type="text" id="telefone" formControlName="telefone" maxlength="9" matInput placeholder="Digite seu telefone">
+          <mat-hint>Digite somente números (sem DDD)</mat-hint>
+          <mat-error *ngIf="cadastroForm.get('telefone').invalid">{{getErrorMessage('telefone')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <button class="limpar" type="button" mat-raised-button color="warn" (click)="onLimpar()">Limpar</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!cadastroForm.valid">Enviar</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </form>
+</mat-card>

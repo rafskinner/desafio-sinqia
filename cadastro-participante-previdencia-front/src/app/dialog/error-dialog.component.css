@@ -1,0 +1,12 @@
+mat-icon {
+  color: red;
+  zoom: 150%;
+}
+
+mat-grid-list {
+  margin-bottom: 16px;
+}
+
+p {
+  text-align: center;
+}

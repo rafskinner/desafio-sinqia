@@ -1,0 +1,14 @@
+<mat-grid-list cols="4" rowHeight="32px">
+  <mat-grid-tile colspan="1" rowspan="1">
+    <mat-icon aria-hidden="false" aria-label="Error icon">error</mat-icon>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="1">
+    <h2>Ocorreu um erro!</h2>
+  </mat-grid-tile>
+</mat-grid-list>
+<div mat-dialog-content>
+  <p>{{data.mensagem}}</p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onClick()">Ok</button>
+</div>
