@@ -4,7 +4,8 @@ Aplicação Angular 8 que permite cadastro e edição de participantes de previd
 
 ## Como executar o projeto
 - Garanta que o backend já está rodando para começar a rodar o frontend
-- Use o comando `ng serve` para rodar localmente.
+- Use o comando `npm install` para instalar as dependências do projeto.
+- Após a instalação, use o comando `ng serve` para rodar localmente.
 - Aguarde alguns segundos até o projeto terminar de inicializar.
 - Navegue até `http://localhost:4200/` para visualizar o projeto.
 - O projeto possui 3 páginas: principal, cadastro, edição
